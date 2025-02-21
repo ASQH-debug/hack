@@ -1,0 +1,126 @@
+/* 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: rgb(234, 75, 67);
+    color: white;
+}
+
+/* 头部导航 */
+header {
+    background-color: rgb(200, 50, 50);
+    padding: 15px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+/* 登录界面样式 */
+.login-box {
+    width: 300px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    margin: 100px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.login-box h2 {
+    color: black;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(200, 50, 50);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-box button:hover {
+    background-color: rgb(180, 40, 40);
+}
+
+/* 团队介绍页 */
+.team-page {
+    background: url("11.JPG") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+}
+
+/* 团队介绍内容 */
+.team-content {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 50px;
+    margin: 50px auto;
+    width: 80%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* 团队成员照片容器 */
+.team-photo-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+/* 统一团队成员卡片 */
+.team-photo {
+    text-align: center;
+    width: 180px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* 统一照片大小，不变形 */
+.team-photo img {
+    width: 180px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* 鼠标悬浮放大效果 */
+.team-photo:hover {
+    transform: scale(1.05);
+}
+
+/* 团队成员姓名 */
+.team-photo .name {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+/* 页脚 */
+footer {
+    background-color: rgb(180, 40, 40);
+    padding: 10px;
+    margin-top: 30px;
+}

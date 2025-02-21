@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Data Analytics Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- 引入 PapaParse 用于解析 CSV -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>📊 YouTube Data Analytics Dashboard</h1>
+    <nav>
+      <a href="hi.html">🏠 DASHBOARD</a>
+      <a href="team.html">👥 TEAM</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Looker Studio 报告 -->
+    <iframe width="50%" height="900" src="https://lookerstudio.google.com/embed/reporting/7b5b480f-a0e3-45f5-94e7-1dec99d1e329/page/JgD" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+    <!-- 📊 Generate YouTube Data -->
+    <div class="fetch-data-container">
+      <h2>📊 Generate a Summary of Popular Videos at this Moment</h2>
+    </div>
+
+    <!-- 🎬 Video Section -->
+    <div class="video-section">
+      <button id="toggleVideoBtn">🎬 Watch Today's Trending Video Summary</button>
+      <div id="videoContainer" style="display: none; margin-top: 20px;">
+        <video width="80%" controls>
+          <source src="trend.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- 📑 CSV Display -->
+    <div class="csv-container">
+      <h2>📑 CSV Display</h2>
+      <button id="toggleCsvBtn">Display CSV File</button>
+      <table id="csvTable" style="display: none;">
+        <!-- CSV Content will be loaded here -->
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    <p>📅 Generate Every Hour Automatically | Maintain by Team 9</p>
+  </footer>
+
+  <!-- 🎬 Video Toggle Script -->
+  <script>
+    document.getElementById("toggleVideoBtn").addEventListener("click", function() {
+      let videoContainer = document.getElementById("videoContainer");
+      if (videoContainer.style.display === "none") {
+        videoContainer.style.display = "block";
+        this.textContent = "🎬 Hide Video";
+      } else {
+        videoContainer.style.display = "none";
+        this.textContent = "🎬 Watch Today's Trending Video Summary";
+      }
+    });
+  </script>
+
+  <!-- 📑 CSV Load & Toggle Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      fetch("data.csv")
+        .then(response => response.text())
+        .then(csvText => {
+          const parsed = Papa.parse(csvText, { header: true });
+          const table = document.getElementById("csvTable");
+
+          if (parsed.meta.fields) {
+            const thead = document.createElement("thead");
+            const headerRow = document.createElement("tr");
+            parsed.meta.fields.forEach(field => {
+              const th = document.createElement("th");
+              th.textContent = field;
+              headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+          }
+
+          const tbody = document.createElement("tbody");
+          parsed.data.forEach(row => {
+            const tr = document.createElement("tr");
+            parsed.meta.fields.forEach(field => {
+              const td = document.createElement("td");
+              td.textContent = row[field] || "";
+              tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+          });
+          table.appendChild(tbody);
+        })
+        .catch(error => console.error("CSV Load Failed:", error));
+    });
+
+    document.getElementById("toggleCsvBtn").addEventListener("click", function() {
+      let csvTable = document.getElementById("csvTable");
+      if (csvTable.style.display === "none") {
+        csvTable.style.display = "table";
+        this.textContent = "Hide CSV File";
+      } else {
+        csvTable.style.display = "none";
+        this.textContent = "Display CSV File";
+      }
+    });
+  </script>
+
+  <script>
+  window.onload = function() {
+      let user = localStorage.getItem("username");
+      if (!user) {
+          // 如果没有登录，跳转到 login.html
+          window.location.href = "login.html";
+      }
+  };
+</script>
+
+
+</body>
+</html>
